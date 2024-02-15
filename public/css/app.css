@@ -1,0 +1,41 @@
+.bg-gray-500 {
+    background-color: #ccc;
+}
+.m-10 {
+    margin: 10px;
+}
+.p-10 {
+    padding: 10px;
+}
+body {
+    color: #000;
+}
+#projects li {
+    list-style-type: circle;
+    color: #000;
+    font-size: 130%;
+}
+#projects label {
+    color: #000;
+}
+
+form input {
+    border: 1px solid black;
+}
+form button {
+    border: 1px solid black;
+    padding: 3px;
+    margin-top: 20px;
+}
+form label {
+    display: block;
+    margin: 10px 0;
+}
+#tasks li {
+    background-color: #eee;
+    margin: 3px 0;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+}
+
