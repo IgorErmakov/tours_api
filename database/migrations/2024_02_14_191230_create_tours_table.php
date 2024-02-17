@@ -12,21 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tours', function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
-            $table->uuid('travelId');
+            $table->uuid('id')
+                ->primary()
+                ->unique();
+            $table->foreignUuId('travelId')
+                ->constrained('travels')
+                ->onDelete('cascade');
             $table->string('name', 255);
             $table->date('startingDate');
             $table->date('endingDate');
             $table->unsignedInteger('price');
             $table->timestamps();
 
-            $table->foreign('travelId')->references('id')->on('travels');
-
-            $table->index([
-                'startingDate',
-                'endingDate',
-                'price',
-            ]);
+            $table->index('startingDate');
+            $table->index('endingDate');
+            $table->index('price');
         });
     }
 

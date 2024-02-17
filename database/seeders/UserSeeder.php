@@ -27,10 +27,9 @@ class UserSeeder extends Seeder
         $editorUser->assignRole(Role::findByName(Role::EDITOR));
 
         $adminToken = $adminUser->createToken('Default');
-
         $editorToken = $adminUser->createToken('Default');
 
-        echo "Admin token: {$adminToken->plainTextToken}\n";
-        echo "Editor token: {$editorToken->plainTextToken}\n";
+        // echo "Admin token: {$adminToken->plainTextToken}\n";
+        // echo "Editor token: {$editorToken->plainTextToken}\n";
     }
 }

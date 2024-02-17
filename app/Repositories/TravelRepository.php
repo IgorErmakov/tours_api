@@ -1,20 +1,24 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\Travel;
 use App\Repositories\Contracts\TravelRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
 
 class TravelRepository implements TravelRepositoryInterface
 {
-    public function findItems(): Collection
+    public function findPublicTravelBySlug(string $slug): ?Travel
     {
-        return Travel::query()
-//            ->where('project_id', $projectId)
-            ->take(10)
-            ->orderBy('priority')
-            ->get();
+        /** @var Travel $travel */
+        $travel = Travel::query()
+            ->where('slug', $slug)
+            ->where('public', true)
+            ->limit(1)
+            ->first();
+
+        return $travel;
     }
 
     public function create(array $data): Travel

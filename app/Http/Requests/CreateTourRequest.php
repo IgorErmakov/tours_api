@@ -33,7 +33,7 @@ class CreateTourRequest extends FormRequest
             'name' => 'required|max:255',
             'travelId' => 'required|exists:travels,id',
             'startingDate' => 'required|date',
-            'endingDate' => 'required|date',
+            'endingDate' => 'required|date|after:startingDate',
             'price' => 'required|numeric',
         ];
     }

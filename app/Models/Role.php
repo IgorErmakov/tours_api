@@ -12,5 +12,6 @@ class Role extends SpatieRole
     use HasUuids;
 
     public const ADMIN = 'admin';
+
     public const EDITOR = 'editor';
 }

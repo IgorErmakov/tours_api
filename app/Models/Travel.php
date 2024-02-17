@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -14,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $description
  * @property int $numberOfDays
+ * @property int $numberOfNights
  * @property bool $public
  * @property array $moods
  * @property string $created_at
@@ -54,6 +56,11 @@ class Travel extends Model
     protected $appends = [
         'numberOfNights',
     ];
+
+    public function tours(): HasMany
+    {
+        return $this->hasMany(Tour::class);
+    }
 
     protected function getNumberOfNightsAttribute(): int
     {

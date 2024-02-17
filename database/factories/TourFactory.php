@@ -19,8 +19,8 @@ class TourFactory extends Factory
         return [
             'name' => fake()->name(),
             'travelId' => fake()->uuid(),
-            'startingDate' => fake()->date(),
-            'endingDate' => fake()->date(),
+            'startingDate' => fake()->dateTimeBetween(startDate: '+2 days', endDate: '+5 days'),
+            'endingDate' => fake()->dateTimeBetween(startDate: '+5 days', endDate: '+365 days'),
             'price' => fake()->randomNumber(5),
         ];
     }

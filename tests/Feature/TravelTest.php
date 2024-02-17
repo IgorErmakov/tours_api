@@ -2,19 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TravelTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Indicates whether the default seeder should run before each test.
-     *
-     * @var bool
-     */
     protected $seed = true;
 
     public function test_travel_triggers_error_with_wrong_role(): void
@@ -35,8 +30,8 @@ class TravelTest extends TestCase
                     'relax' => 30,
                     'history' => 10,
                     'culture' => 20,
-                    'party' => 10
-                ]
+                    'party' => 10,
+                ],
             ]);
 
         $response->assertStatus(403);
@@ -50,19 +45,19 @@ class TravelTest extends TestCase
 
         $response = $this->actingAs($user)
             ->postJson(route('travel.store'), [
-            'name' => 'Tokio',
-            'slug' => 'tokio2',
-            'public' => true,
-            'description' => 'Amazing experience',
-            'numberOfDays' => 5,
-            'moods' => [
-                'nature' => 100,
-                'relax' => 30,
-                'history' => 10,
-                'culture' => 20,
-                'party' => 10
-            ]
-        ]);
+                'name' => 'Tokio',
+                'slug' => 'tokio2',
+                'public' => true,
+                'description' => 'Amazing experience',
+                'numberOfDays' => 5,
+                'moods' => [
+                    'nature' => 100,
+                    'relax' => 30,
+                    'history' => 10,
+                    'culture' => 20,
+                    'party' => 10,
+                ],
+            ]);
 
         $response->assertStatus(201)
             ->assertJsonPath('travel.name', 'Tokio');
@@ -74,7 +69,6 @@ class TravelTest extends TestCase
             ->where('name', 'Admin')
             ->first();
 
-        // @todo igor: add dataProvider
         $response = $this->actingAs($user)
             ->postJson(route('travel.store'), [
                 'slug' => 'tokio2',
@@ -86,8 +80,8 @@ class TravelTest extends TestCase
                     'relax' => 30,
                     'history' => 10,
                     'culture' => 20,
-                    'party' => 10
-                ]
+                    'party' => 10,
+                ],
             ]);
 
         $response->assertStatus(422)

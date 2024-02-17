@@ -4,60 +4,54 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\IndexTourRequest;
 use App\Http\Requests\CreateTourRequest;
+use App\Http\Requests\IndexTourRequest;
 use App\Http\Requests\UpdateTourRequest;
-use App\Repositories\TourRepository;
-use App\Repositories\TravelRepository;
+use App\Http\Resources\TourResource;
 use App\Services\TourCreator;
+use App\Services\TourRetrieval;
 use App\Services\TourUpdater;
+use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 
 class TourController extends Controller
 {
     public function index(
-        TravelRepository $travelRepository,
-        TourRepository $tourRepository,
+        TourRetrieval $tourRetrieval,
         IndexTourRequest $request
     ) {
         $request->validated();
-        $travel = $travelRepository->findPublicTravelBySlug($request->slug);
 
-        if (!$travel) {
-
-            return response(['error' => 'Travel not found'], 422);
-        }
-
-        $tours = $tourRepository->findItems(
-            $travel->id,
-            $request->page,
-            $request->dateFrom,
-            $request->dateTo,
-            $request->priceFrom * 100,
-            $request->priceTo * 100,
+        $tours = $tourRetrieval->findTours(
+            $request->slug,
+            (int) $request->page,
+            $request->dateFrom ? Carbon::parse($request->dateFrom) : null,
+            $request->dateTo ? Carbon::parse($request->dateTo) : null,
+            $request->priceFrom ? intval($request->priceFrom * 100) : 0,
+            $request->priceTo ? intval($request->priceTo * 100) : 0,
             $request->sort,
-            $request->sortDir,
+            $request->sortDir === 'asc' ? 'asc' : 'desc',
         );
 
-//        IndexService
-
-        // @todo igor: add resource
-
-        return response($tours, 200);
+        return TourResource::collection($tours);
     }
 
     public function store(TourCreator $tourCreator, CreateTourRequest $request)
     {
-        $input = $request->validated();
-        $tour = $tourCreator->create($input);
+        $tour = $tourCreator->create(
+            $request->validated()
+        );
 
-        return response(['tour' => $tour->toArray()], 201);
+        return response(['tour' => $tour->toArray()], Response::HTTP_CREATED);
     }
 
     public function update(string $id, TourUpdater $tourCreator, UpdateTourRequest $request)
     {
-        $input = $request->validated();
-        $tour = $tourCreator->update($id, $input);
+        $tour = $tourCreator->update(
+            $id,
+            $request->validated()
+        );
 
-        return response(['tour' => $tour->toArray()], 200);
+        return response(['tour' => $tour->toArray()]);
     }
 }

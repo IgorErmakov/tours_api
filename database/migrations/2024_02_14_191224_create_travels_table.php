@@ -17,14 +17,12 @@ return new class extends Migration
             $table->string('name', 255);
             $table->text('description');
             $table->unsignedInteger('numberOfDays');
-            $table->boolean('public');
+            $table->boolean('public')->default(false);
             $table->json('moods');
             $table->timestamps();
 
-            $table->index([
-                'slug',
-                'public',
-            ]);
+            $table->index('slug');
+            $table->index('public');
         });
     }
 

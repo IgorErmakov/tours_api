@@ -9,7 +9,9 @@ use App\Repositories\Contracts\TourRepositoryInterface;
 
 class TourCreator
 {
-    public function __construct(protected TourRepositoryInterface $repository) {}
+    public function __construct(protected TourRepositoryInterface $repository)
+    {
+    }
 
     public function create(array $data): Tour
     {

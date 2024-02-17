@@ -187,4 +187,7 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'tours' => [
+        'pagination_limit' => env('TOURS_PAGE_LIMIT', 10),
+    ],
 ];

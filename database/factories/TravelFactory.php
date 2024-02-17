@@ -18,7 +18,7 @@ class TravelFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'slug' => fake()->name(),
+            'slug' => fake()->slug(),
             'description' => fake()->text(200),
             'numberOfDays' => fake()->numberBetween(1, 99),
             'public' => fake()->boolean(),

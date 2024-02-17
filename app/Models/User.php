@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -13,9 +15,9 @@ class User extends Authenticatable
 {
     use HasApiTokens,
         HasFactory,
-        Notifiable,
         HasRoles,
-        HasUuids;
+        HasUuids,
+        Notifiable;
 
     /**
      * The attributes that are mass assignable.

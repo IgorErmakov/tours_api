@@ -4,7 +4,6 @@
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TravelController;
 use App\Models\Permission;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,18 +24,18 @@ Route::get('/', function () {
 Route::get('/tour', [TourController::class, 'index'])
     ->name('tour.index');
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('/travel', [TravelController::class, 'store'])
         ->name('travel.store')
-        ->middleware('permission:' . Permission::CREATE_TRAVEL);
+        ->middleware('permission:'.Permission::CREATE_TRAVEL);
 
     Route::prefix('/tour')->group(function () {
         Route::post('/', [TourController::class, 'store'])
             ->name('tour.store')
-            ->middleware('permission:' . Permission::CREATE_TOUR);
+            ->middleware('permission:'.Permission::CREATE_TOUR);
 
         Route::put('/{id}', [TourController::class, 'update'])
             ->name('tour.update')
-            ->middleware('permission:' . Permission::EDIT_TOUR);
+            ->middleware('permission:'.Permission::EDIT_TOUR);
     });
 });

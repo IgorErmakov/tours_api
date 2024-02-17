@@ -7,9 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @property string $name
  * @property string $slug
- * @property boolean $public
+ * @property bool $public
  * @property string $description
- * @property integer $numberOfDays
+ * @property int $numberOfDays
  * @property array $moods
  */
 class CreateTravelRequest extends FormRequest

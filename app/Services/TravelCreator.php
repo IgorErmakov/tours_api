@@ -9,7 +9,9 @@ use App\Repositories\Contracts\TravelRepositoryInterface;
 
 class TravelCreator
 {
-    public function __construct(protected TravelRepositoryInterface $repository) {}
+    public function __construct(protected TravelRepositoryInterface $repository)
+    {
+    }
 
     public function create(array $data): Travel
     {

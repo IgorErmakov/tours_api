@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use App\Repositories\TravelRepository;
+use App\Repositories\Contracts\TourRepositoryInterface;
 use App\Repositories\Contracts\TravelRepositoryInterface;
 use App\Repositories\TourRepository;
-use App\Repositories\Contracts\TourRepositoryInterface;
+use App\Repositories\TravelRepository;
+use Illuminate\Support\ServiceProvider;
 
 class RepositoriesProvider extends ServiceProvider
 {

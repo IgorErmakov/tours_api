@@ -9,7 +9,9 @@ use App\Repositories\Contracts\TourRepositoryInterface;
 
 class TourUpdater
 {
-    public function __construct(protected TourRepositoryInterface $repository) {}
+    public function __construct(protected TourRepositoryInterface $repository)
+    {
+    }
 
     public function update(string $tourId, array $data): Tour
     {
