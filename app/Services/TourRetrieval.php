@@ -27,13 +27,13 @@ class TourRetrieval
         string $sort,
         string $sortDirection
     ): Collection {
-        $limit = (int) config('app.tours.pagination_limit', 10);
         $travel = $this->travelRepository->findPublicTravelBySlug($slug);
-
         if (! $travel) {
 
             return collect();
         }
+
+        $limit = (int) config('app.tours.pagination_limit', 10);
 
         return $this->tourRepository->findTours(
             $travel->id,

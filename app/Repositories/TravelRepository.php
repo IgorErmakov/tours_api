@@ -11,14 +11,11 @@ class TravelRepository implements TravelRepositoryInterface
 {
     public function findPublicTravelBySlug(string $slug): ?Travel
     {
-        /** @var Travel $travel */
-        $travel = Travel::query()
+        return Travel::query()
             ->where('slug', $slug)
             ->where('public', true)
             ->limit(1)
             ->first();
-
-        return $travel;
     }
 
     public function create(array $data): Travel

@@ -4,10 +4,13 @@
 ```shell
 composer install
 ./vendor/bin/sail up
-./vendor/bin/sail migrate
-./vendor/bin/sail artisan db:seed
+./vendor/bin/sail migrate --env=testing
 ```
 
+Run Unit tests:
+```shell
+./vendor/bin/sail test
+```
 
 Linters and analyzators
 
@@ -16,7 +19,3 @@ Linters and analyzators
 ./vendor/bin/pint -v
 ```
 
-Run Unit tests:
-```shell
-./vendor/bin/sail test
-```

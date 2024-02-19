@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,11 +15,7 @@ class TravelTest extends TestCase
 
     public function test_travel_triggers_error_with_wrong_role(): void
     {
-        $user = User::query()
-            ->where('name', 'Editor')
-            ->first();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->getUser('Editor'))
             ->post(route('travel.store'), [
                 'name' => 'Tokio',
                 'slug' => 'tokio2',
@@ -39,11 +36,7 @@ class TravelTest extends TestCase
 
     public function test_travel_created_properly(): void
     {
-        $user = User::query()
-            ->where('name', 'Admin')
-            ->first();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->getUser('Admin'))
             ->postJson(route('travel.store'), [
                 'name' => 'Tokio',
                 'slug' => 'tokio2',
@@ -65,11 +58,7 @@ class TravelTest extends TestCase
 
     public function test_fails_with_validation(): void
     {
-        $user = User::query()
-            ->where('name', 'Admin')
-            ->first();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->getUser('Admin'))
             ->postJson(route('travel.store'), [
                 'slug' => 'tokio2',
                 'public' => true,

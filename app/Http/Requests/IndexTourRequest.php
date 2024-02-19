@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -13,12 +15,6 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string $dateTo
  * @property string $sort
  * @property string $sortDir
- *
- * A public (no auth) endpoint to get a list of paginated tours by the travel slug
- * (e.g. all the tours of the travel foo-bar). Users can filter (search) the results by
- * priceFrom, priceTo, dateFrom (from that startingDate) and dateTo (until that startingDate).
- * User can sort the list by price asc and desc.
- * They will always be sorted, after every additional user-provided filter, by startingDate asc.
  */
 class IndexTourRequest extends FormRequest
 {

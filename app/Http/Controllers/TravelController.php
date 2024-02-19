@@ -11,8 +11,9 @@ class TravelController extends Controller
 {
     public function store(TravelCreator $travelCreator, CreateTravelRequest $request)
     {
-        $input = $request->validated();
-        $travel = $travelCreator->create($input);
+        $travel = $travelCreator->create(
+            $request->validated()
+        );
 
         return response(['travel' => $travel->toArray()], 201);
     }

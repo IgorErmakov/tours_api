@@ -45,9 +45,9 @@ class TourController extends Controller
         return response(['tour' => $tour->toArray()], Response::HTTP_CREATED);
     }
 
-    public function update(string $id, TourUpdater $tourCreator, UpdateTourRequest $request)
+    public function update(string $id, TourUpdater $tourUpdater, UpdateTourRequest $request)
     {
-        $tour = $tourCreator->update(
+        $tour = $tourUpdater->update(
             $id,
             $request->validated()
         );
