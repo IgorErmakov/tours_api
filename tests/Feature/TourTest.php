@@ -56,27 +56,6 @@ class TourTest extends TestCase
             ->assertJsonPath('message', 'The selected travel id is invalid.');
     }
 
-    public function test_tour_updates_properly_by_editor(): void
-    {
-        $travel = Travel::factory()->create();
-        $tour = Tour::factory()->create([
-            'travelId' => $travel->id,
-        ]);
-
-        $response = $this->actingAs($this->getUser('Editor'))
-            ->putJson(route('tour.update', [$tour->id]), [
-                'name' => 'Tokio summer 2024',
-                'travelId' => $travel->id,
-                'startingDate' => now(),
-                'endingDate' => now(),
-                'price' => 1799.99,
-            ]);
-
-        $response->assertStatus(200)
-            ->assertJsonPath('tour.name', 'Tokio summer 2024')
-            ->assertJsonPath('tour.price', 1799.99);
-    }
-
     public function test_retrieves_the_data_properly(): void
     {
         Carbon::setTestNow('2024-04-04 04:04:04');

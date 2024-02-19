@@ -6,11 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTourRequest;
 use App\Http\Requests\IndexTourRequest;
-use App\Http\Requests\UpdateTourRequest;
 use App\Http\Resources\TourResource;
 use App\Services\TourCreator;
 use App\Services\TourRetrieval;
-use App\Services\TourUpdater;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 
@@ -43,15 +41,5 @@ class TourController extends Controller
         );
 
         return response(['tour' => $tour->toArray()], Response::HTTP_CREATED);
-    }
-
-    public function update(string $id, TourUpdater $tourUpdater, UpdateTourRequest $request)
-    {
-        $tour = $tourUpdater->update(
-            $id,
-            $request->validated()
-        );
-
-        return response(['tour' => $tour->toArray()]);
     }
 }

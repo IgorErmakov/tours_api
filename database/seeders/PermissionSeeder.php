@@ -20,7 +20,7 @@ class PermissionSeeder extends Seeder
             'name' => Permission::CREATE_TOUR,
         ]);
         $editTour = Permission::create([
-            'name' => Permission::EDIT_TOUR,
+            'name' => Permission::EDIT_TRAVEL,
         ]);
 
         $admin = Role::create([

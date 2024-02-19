@@ -1,6 +1,5 @@
 <?php
 
-//use App\Models\Role;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TravelController;
 use App\Models\Permission;
@@ -34,8 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
             ->name('tour.store')
             ->middleware('permission:'.Permission::CREATE_TOUR);
 
-        Route::put('/{id}', [TourController::class, 'update'])
-            ->name('tour.update')
-            ->middleware('permission:'.Permission::EDIT_TOUR);
+        Route::put('/{id}', [TravelController::class, 'update'])
+            ->name('travel.update')
+            ->middleware('permission:'.Permission::EDIT_TRAVEL);
     });
 });

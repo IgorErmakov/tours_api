@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\Travel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -54,6 +55,34 @@ class TravelTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonPath('travel.name', 'Tokio');
+    }
+
+    public function test_tour_updates_properly_by_editor(): void
+    {
+        $travel = Travel::factory()->create([
+            'name' => 'Tokio summer 2024',
+            'slug' => 'Tokio_summer_2024',
+            'public' => false,
+            'description' => '-',
+            'numberOfDays' => 10,
+        ]);
+
+        $response = $this->actingAs($this->getUser('Editor'))
+            ->putJson(route('travel.update', [$travel->id]), [
+                'name' => 'Tokio summer 2025',
+                'slug' => 'tokio_summer_2025',
+                'public' => false,
+                'description' => 'Descr',
+                'numberOfDays' => 5,
+            ]);
+
+        $response->assertStatus(200)
+            ->assertJsonPath('travel.name', 'Tokio summer 2025')
+            ->assertJsonPath('travel.slug', 'tokio_summer_2025')
+            ->assertJsonPath('travel.public', false)
+            ->assertJsonPath('travel.description', 'Descr')
+            ->assertJsonPath('travel.numberOfDays', 5)
+            ->assertJsonPath('travel.numberOfNights', 4);
     }
 
     public function test_fails_with_validation(): void

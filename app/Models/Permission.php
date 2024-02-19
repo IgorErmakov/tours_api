@@ -14,7 +14,7 @@ class Permission extends SpatiePermission
 
     public const CREATE_TOUR = 'create tour';
 
-    public const EDIT_TOUR = 'edit tour';
+    public const EDIT_TRAVEL = 'edit tour';
 
     use HasFactory;
     use HasUuids;

@@ -11,4 +11,6 @@ interface TravelRepositoryInterface
     public function findPublicTravelBySlug(string $slug): ?Travel;
 
     public function create(array $data): Travel;
+
+    public function update(string $travelId, array $data): Travel;
 }

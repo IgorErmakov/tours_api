@@ -12,8 +12,6 @@ interface TourRepositoryInterface
 {
     public function create(array $data): Tour;
 
-    public function update(string $tourId, array $data): Tour;
-
     public function findTours(
         string $travelId,
         int $page,

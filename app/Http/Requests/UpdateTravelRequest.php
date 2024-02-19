@@ -13,7 +13,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property Carbon $endingDate
  * @property float $price
  */
-class UpdateTourRequest extends FormRequest
+class UpdateTravelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,9 +32,10 @@ class UpdateTourRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'startingDate' => 'required|date',
-            'endingDate' => 'required|date',
-            'price' => 'required|numeric',
+            'slug' => 'required|unique:travels|max:255',
+            'public' => 'required|boolean',
+            'description' => 'required',
+            'numberOfDays' => 'required|integer',
         ];
     }
 }

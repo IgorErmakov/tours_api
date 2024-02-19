@@ -26,4 +26,13 @@ class TravelRepository implements TravelRepositoryInterface
 
         return $travel;
     }
+
+    public function update(string $travelId, array $data): Travel
+    {
+        /** @var Travel $travel */
+        $travel = Travel::findOrFail($travelId);
+        $travel->update($data);
+
+        return $travel;
+    }
 }
